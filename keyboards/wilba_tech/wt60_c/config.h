@@ -21,12 +21,13 @@
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
+#define TAPPING_TERM 140
 
 // IS31FL3731 driver
 #define DRIVER_COUNT 2
 #define RGB_MATRIX_LED_COUNT 72
 
-#define RGB_BACKLIGHT_ENABLED 1
+#define RGB_BACKLIGHT_ENABLED 0
 
 // This conditionally compiles the backlight code for WT60-BX specifics
 // Note: WT60-C is the same RGB matrix as WT60-BX

@@ -15,12 +15,11 @@ NKRO_ENABLE = yes           # Enable N-Key Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 AUDIO_ENABLE = no           # Audio output
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight.
+TAP_DANCE_ENABLE = yes
 
 CIE1931_CURVE = yes
 
 # project specific files
 SRC =	keyboards/wilba_tech/wt_main.c \
-		keyboards/wilba_tech/wt_rgb_backlight.c \
-		quantum/color.c \
 		drivers/led/issi/is31fl3731.c \
 		i2c_master.c
