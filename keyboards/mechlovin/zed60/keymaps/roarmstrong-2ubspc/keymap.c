@@ -15,11 +15,9 @@
  */
 #include QMK_KEYBOARD_H
 
-#define LT1_CAP     LT(1, KC_CAPS)
-
 
 enum {
-        TTILD_HALT,
+        TTILD_HALT
 };
 
 
@@ -33,7 +31,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     tap_dance_action_t *action;
 
     switch (keycode) {
-        case TD(TTILD_HALT):  // list all tap dance keycodes with tap-hold configurations
+        case TD(TTILD_HALT):
             action = &tap_dance_actions[TD_INDEX(keycode)];
             if (!record->event.pressed && action->state.count && !action->state.finished) {
                 tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
@@ -77,6 +75,19 @@ tap_dance_action_t tap_dance_actions[] = {
     [TTILD_HALT] = ACTION_TAP_DANCE_TAP_HOLD(KC_TILD, KC_LALT),
 };
 
+const key_override_t i3_up = ko_make_basic(MOD_MASK_GUI, KC_W, RGUI(KC_UP));
+const key_override_t i3_left = ko_make_basic(MOD_MASK_GUI, KC_A, RGUI(KC_LEFT));
+const key_override_t i3_right = ko_make_basic(MOD_MASK_GUI, KC_D, RGUI(KC_RIGHT));
+const key_override_t i3_down = ko_make_basic(MOD_MASK_GUI, KC_S, RGUI(KC_DOWN));
+
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &i3_up,
+    &i3_down,
+    &i3_left,
+    &i3_right,
+    NULL // Null terminate the array of overrides!
+};
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[0] = LAYOUT_60_ansi_split_bs_rshift(
@@ -84,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
                 TD(TTILD_HALT), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
                 KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT, KC_UP), MO(2),
-                KC_LCTL, KC_NO, KC_LGUI,                            KC_SPC,                   KC_RGUI, LM(2, MOD_LGUI), KC_NO, MT(MOD_RCTL, KC_RIGHT)),
+                KC_LCTL, KC_NO, KC_LGUI,                            KC_SPC,                   KC_RGUI, KC_RGUI, KC_NO, MT(MOD_RCTL, KC_RIGHT)),
 [1] = LAYOUT_60_ansi_split_bs_rshift(
                 KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL, KC_DEL,
                 KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SCRL, KC_PAUS, RGB_MODE_FORWARD,   RGB_MODE_REVERSE, KC_INS,
