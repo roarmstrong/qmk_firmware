@@ -22,3 +22,6 @@ CIE1931_CURVE = yes
 SRC =	keyboards/wilba_tech/wt_main.c \
 		drivers/led/issi/is31fl3731.c
 I2C_DRIVER_REQUIRED = yes
+TAP_DANCE_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
+CAPS_WORD_ENABLE = yes
